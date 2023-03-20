@@ -1,0 +1,13 @@
+package org.example.model.parameters;
+
+public enum ParameterName {
+    GAUSS_FILTER_WINDOW_SIZE,
+    GAMMA,
+    BINARIZATION,
+    IMAGE_ANGLE,
+    QUANTIZATION_NUMBER_RED,
+    QUANTIZATION_NUMBER_GREEN,
+    QUANTIZATION_NUMBER_BLUE,
+    FRAME_WIDTH,
+    FRAME_HEIGHT;
+}

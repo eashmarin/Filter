@@ -1,10 +1,11 @@
 package org.example;
 
-import javax.swing.*;
+import org.example.model.Model;
+import org.example.ui.Frame;
 
 public class Main {
     public static void main(String[] args) {
-        Initializer initializer = new Initializer();
-        initializer.run();
+        Model model = new Model();
+        Frame frame = new Frame(model);
     }
 }

@@ -21,7 +21,7 @@ public class MainController extends Controller {
         //mainPanel.setCurrentCanvas(mainPanel.getAppliedCanvas());
         mainPanel.setCanvasSize(mainPanel.getAppliedCanvas().getWidth(), mainPanel.getAppliedCanvas().getHeight());
         //frame.getScrollPane().setPreferredSize(new Dimension(mainPanel.getAppliedCanvas().getWidth() - 4, mainPanel.getAppliedCanvas().getHeight() - 4));
-        mainPanel.setPreferredSize(new Dimension(mainPanel.getOriginalCanvas().getWidth(), mainPanel.getOriginalCanvas().getHeight()));
+        mainPanel.setPreferredSize(new Dimension(mainPanel.getClearCanvas().getWidth(), mainPanel.getClearCanvas().getHeight()));
         mainPanel.repaint();
         mainPanel.dispatchEvent(new ComponentEvent(mainPanel, ComponentEvent.COMPONENT_RESIZED));
     };

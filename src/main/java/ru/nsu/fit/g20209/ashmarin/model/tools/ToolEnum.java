@@ -15,6 +15,7 @@ public enum ToolEnum {
     PIXELATE("Pixelate filter", ToolCategory.NO_MODIFY),
     ROTATOR("Rotation", ToolCategory.NO_MODIFY),
     RESIZER("Resize", ToolCategory.MODIFY);
+
     private final String title;
     private final ToolCategory category;
 

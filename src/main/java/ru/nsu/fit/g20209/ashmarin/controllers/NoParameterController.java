@@ -26,7 +26,7 @@ public class NoParameterController extends Controller{
         ToolEnum toolEnum = ToolEnum.valueOf(button.getName());
         Tool tool = model.getToolMap().get(toolEnum);
 
-        BufferedImage appliedImage = tool.apply(mainPanel.getOriginalCanvas());
+        BufferedImage appliedImage = tool.apply(mainPanel.getClearCanvas());
         mainPanel.setCurrentCanvas(appliedImage);
         mainPanel.setAppliedCanvas(appliedImage);
         mainPanel.setPreferredSize(new Dimension(mainPanel.getAppliedCanvas().getWidth(), mainPanel.getAppliedCanvas().getHeight()));

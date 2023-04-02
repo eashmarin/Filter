@@ -27,7 +27,7 @@ public abstract class Controller {
             return;
         }
 
-        BufferedImage originalCanvas = mainPanel.getOriginalCanvas();
+        BufferedImage originalCanvas = mainPanel.getClearCanvas();
         if (mainPanel.getAppliedCanvas().equals(mainPanel.getCurrentCanvas())) {
             mainPanel.setCurrentCanvas(originalCanvas);
         } else {
@@ -45,6 +45,16 @@ public abstract class Controller {
 
     public void saveButtonClicked() {
         FileUtils.handleSave(mainPanel);
+    }
+
+    public void backToOriginalImage() {
+        BufferedImage originalImage = mainPanel.getOriginalImage();
+        mainPanel.setClearCanvas(originalImage);
+        mainPanel.setCurrentCanvas(originalImage);
+        mainPanel.setAppliedCanvas(originalImage);
+        mainPanel.setPreferredSize(new Dimension(originalImage.getWidth(), originalImage.getHeight()));
+        mainPanel.dispatchEvent(new ComponentEvent(mainPanel, ComponentEvent.COMPONENT_RESIZED));
+        mainPanel.repaint();
     }
 
     public abstract void toolButtonClicked(ActionEvent e);

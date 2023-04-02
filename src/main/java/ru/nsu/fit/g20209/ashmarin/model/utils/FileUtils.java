@@ -20,7 +20,8 @@ public class FileUtils {
         int option = fileChooser.showOpenDialog(null);
         if (option == JFileChooser.APPROVE_OPTION) {
             BufferedImage newCanvas = loadImageFromFile(fileChooser.getSelectedFile().getPath());
-            mainPanel.setOriginalCanvas(newCanvas);
+            mainPanel.setClearCanvas(newCanvas);
+            mainPanel.setOriginalImage(newCanvas);
             mainPanel.setCurrentCanvas(newCanvas);
             mainPanel.repaint();
         }

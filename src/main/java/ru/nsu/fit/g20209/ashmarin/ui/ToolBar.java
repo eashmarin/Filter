@@ -60,6 +60,15 @@ public class ToolBar extends JToolBar {
             add(newButton);
         }
 
+        Button originalImgBtn = new Button(getClass().getClassLoader().getResource("Expand.png"));
+        originalImgBtn.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.backToOriginalImage();
+            }
+        });
+        add(originalImgBtn);
+
         setBackground(Color.WHITE);
 
         setFloatable(false);

@@ -107,7 +107,7 @@ public class Frame extends JFrame {
     }
 
     public BufferedImage getCanvas() {
-        return mainPanel.getOriginalCanvas();
+        return mainPanel.getClearCanvas();
     }
 
     public MainPanel getMainPanel() {

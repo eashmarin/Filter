@@ -42,7 +42,7 @@ public class ParameterController extends Controller {
             frame.getParameterDialog().setParameters(toolEnum, manualParameters);
             frame.getParameterDialog().setVisible(true);
         } else {
-            mainPanel.setCurrentCanvas(parameterizedTool.apply(mainPanel.getOriginalCanvas()));
+            mainPanel.setCurrentCanvas(parameterizedTool.apply(mainPanel.getClearCanvas()));
             mainPanel.setAppliedCanvas(mainPanel.getCurrentCanvas());
             frame.getMainPanel().repaint();
             model.setSelectedTool(parameterizedTool);
@@ -73,7 +73,7 @@ public class ParameterController extends Controller {
         if (toolEnum.getCategory().equals(ToolCategory.MODIFY)) {
             inputImage = mainPanel.getCurrentCanvas();
         } else {
-            inputImage = mainPanel.getOriginalCanvas();
+            inputImage = mainPanel.getClearCanvas();
         }
 
         MainPanel mainPanel = frame.getMainPanel();

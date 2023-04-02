@@ -79,6 +79,16 @@ public class MenuBar extends JMenuBar {
                 modifyMenu.add(newButton);
             }
         }
+
+        JMenuItem originalImgItem = new JMenuItem("Back to original");
+        originalImgItem.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.backToOriginalImage();
+            }
+        });
+        modifyMenu.add(originalImgItem);
+
         add(modifyMenu);
 
         JMenu aboutItem = new JMenu("About");

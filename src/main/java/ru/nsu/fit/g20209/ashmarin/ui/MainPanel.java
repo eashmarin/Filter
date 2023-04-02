@@ -14,7 +14,8 @@ import java.util.Objects;
 public class MainPanel extends JPanel {
     private BufferedImage currentCanvas;
     private BufferedImage appliedCanvas;
-    private BufferedImage originalCanvas;
+    private BufferedImage clearCanvas;
+    private BufferedImage originalImage;
 
     public MainPanel() {
         super();
@@ -23,20 +24,21 @@ public class MainPanel extends JPanel {
                 BorderFactory.createEmptyBorder(4, 4, 4, 4),
                 BorderFactory.createDashedBorder(Color.BLACK, 5, 4)
         ));
-        originalCanvas = FileUtils.loadImageFromFile(Objects.requireNonNull(getClass().getClassLoader().getResource("test_image.jpg")).getPath());
-        currentCanvas = originalCanvas;
+        clearCanvas = FileUtils.loadImageFromFile(Objects.requireNonNull(getClass().getClassLoader().getResource("test_image.jpg")).getPath());
+        currentCanvas = clearCanvas;
+        originalImage = ImageUtils.copyOf(clearCanvas);
 
-        setPreferredSize(new Dimension(originalCanvas.getWidth(), originalCanvas.getHeight()));
+        setPreferredSize(new Dimension(clearCanvas.getWidth(), clearCanvas.getHeight()));
     }
 
     public void setCanvasSize(int width, int height) {
-        this.originalCanvas = ImageUtils.scaleBufferedImage(originalCanvas, width, height);
+        this.clearCanvas = ImageUtils.scaleBufferedImage(clearCanvas, width, height);
         this.currentCanvas = ImageUtils.scaleBufferedImage(currentCanvas, width, height);
         this.appliedCanvas = ImageUtils.scaleBufferedImage(appliedCanvas, width, height);
     }
 
-    public BufferedImage getOriginalCanvas() {
-        return originalCanvas;
+    public BufferedImage getClearCanvas() {
+        return clearCanvas;
     }
 
     @Override
@@ -61,8 +63,8 @@ public class MainPanel extends JPanel {
         this.appliedCanvas = appliedCanvas;
     }
 
-    public void setOriginalCanvas(BufferedImage newCanvas) {
-        this.originalCanvas = newCanvas;
+    public void setClearCanvas(BufferedImage newCanvas) {
+        this.clearCanvas = newCanvas;
     }
 
     public void insertControllerActions(Controller controller) {
@@ -76,4 +78,11 @@ public class MainPanel extends JPanel {
     }
 
 
+    public BufferedImage getOriginalImage() {
+        return originalImage;
+    }
+
+    public void setOriginalImage(BufferedImage originalImage) {
+        this.originalImage = originalImage;
+    }
 }

@@ -26,26 +26,11 @@ public class RadioButtonsPanel extends ParameterPanel {
         btnGroup.add(btn2);
         btnGroup.add(btn3);
 
-        btn1.setSelected(true);
-        textField = new JTextField("1");
+        btn2.setSelected(true);
+        textField = new JTextField("2");
 
-        btn1.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                textField.setText("1");
-            }
-        });
-        btn2.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                textField.setText("2");
-            }
-        });
-        btn3.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                textField.setText("3");
-            }
-        });
+        btn1.addChangeListener(e -> textField.setText("1"));
+        btn2.addChangeListener(e -> textField.setText("2"));
+        btn3.addChangeListener(e -> textField.setText("3"));
     }
 }

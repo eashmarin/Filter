@@ -15,7 +15,7 @@ public class ParameterFactory {
             case IMAGE_ANGLE -> new Parameter(parameterName, -180, 0, 180);
             case FRAME_WIDTH -> new Parameter(parameterName, 640, 800, Integer.MAX_VALUE, false);
             case FRAME_HEIGHT -> new Parameter(parameterName, 480, 600, Integer.MAX_VALUE, false);
-            case RESIZE_TYPE -> new Parameter(parameterName, 1, 1, 3);
+            case RESIZE_TYPE -> new Parameter(parameterName, 1, 2, 3);
             case BLOCK_SIZE -> new Parameter(parameterName, 1, 10, 100);
         };
     }

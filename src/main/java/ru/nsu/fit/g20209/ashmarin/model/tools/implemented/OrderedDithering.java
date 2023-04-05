@@ -14,33 +14,33 @@ public class OrderedDithering extends ParameterizedTool {
 
     @Override
     public BufferedImage apply(BufferedImage image) {
-        int redColors =  parameters.get(0).getValue().intValue();
+        int redColors = parameters.get(0).getValue().intValue();
         int greenColors = parameters.get(1).getValue().intValue();
         int blueColors = parameters.get(2).getValue().intValue();
         int width = image.getWidth();
         int height = image.getHeight();
-        int size = calcMatrixSize(redColors + greenColors + blueColors);
 
-        int[][] ditherMatrix = generateDitherMatrix(size);
-        double[][] normalizedMatrix = new double[size][size];
+        int redMatrixSize = calcMatrixSize(redColors);
+        int greenMatrixSize = calcMatrixSize(greenColors);
+        int blueMatrixSize = calcMatrixSize(blueColors);
 
-        double maxVal = size * size;
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                normalizedMatrix[i][j] = ditherMatrix[i][j] / maxVal;
-            }
-        }
+        double[][] redMatrix = getNormalizedDitherMatrix(redMatrixSize);
+        double[][] greenMatrix = getNormalizedDitherMatrix(greenMatrixSize);
+        double[][] blueMatrix = getNormalizedDitherMatrix(blueMatrixSize);
+
+        double kRed = (255.0 / redColors);
+        double kGreen = (255.0 / greenColors);
+        double kBlue = (255.0 / blueColors);
 
         BufferedImage ditheredImage = new BufferedImage(width, height, image.getType());
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 int rgb = image.getRGB(x, y);
-                double matrixValue = normalizedMatrix[x % size][y % size];
 
-                double red = (ColorUtils.getRed(rgb) + (int) ((255.0 / redColors) * (matrixValue - 0.5)));
-                double green = (ColorUtils.getGreen(rgb) + (int) ((255.0 / greenColors) * (matrixValue - 0.5)));
-                double blue = (ColorUtils.getBlue(rgb) + (int) ((255.0 / blueColors) * (matrixValue - 0.5)));
+                double red = (ColorUtils.getRed(rgb) + (int) (kRed * (redMatrix[x % redMatrixSize][y % redMatrixSize] - 0.5)));
+                double green = (ColorUtils.getGreen(rgb) + (int) (kGreen * (greenMatrix[x % greenMatrixSize][y % greenMatrixSize] - 0.5)));
+                double blue = (ColorUtils.getBlue(rgb) + (int) (kBlue * (blueMatrix[x % blueMatrixSize][y % blueMatrixSize] - 0.5)));
 
                 ditheredImage.setRGB(x, y, ColorUtils.getRGB(
                         ColorUtils.closestInPalette((int) red, redColors),
@@ -54,12 +54,27 @@ public class OrderedDithering extends ParameterizedTool {
     }
 
     private int calcMatrixSize(int colorVariants) {
-        int size = 1;
-        do {
+        int sizeNeeded = (int) Math.round(Math.sqrt(256.0 / colorVariants));
+
+        int size = 2;
+        while (size < sizeNeeded) {
             size *= 2;
-        } while (Math.pow(size, 2) < colorVariants);
+        }
 
         return size;
+    }
+
+    private double[][] getNormalizedDitherMatrix(int size) {
+        int[][] ditherMatrix = generateDitherMatrix(size);
+        double[][] normalizedMatrix = new double[size][size];
+        double maxVal = size * size;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                normalizedMatrix[i][j] = ditherMatrix[i][j] / maxVal;
+            }
+        }
+
+        return normalizedMatrix;
     }
 
     private int[][] generateDitherMatrix(int n) {

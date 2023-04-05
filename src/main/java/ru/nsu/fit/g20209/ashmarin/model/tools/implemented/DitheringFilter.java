@@ -25,7 +25,7 @@ public class DitheringFilter extends ParameterizedTool {
         BufferedImage inputImage = ImageUtils.copyOf(image);
         BufferedImage ditheringImage = new BufferedImage(width, height, image.getType());//ImageUtils.quantizeImage(image, parameters, quantizedColors);
 
-        //fillBorders(ditheringImage, width, height, quantizedColors);
+        fillBorders(ditheringImage, width, height);
 
         int[] xs = new int[4];
         int[] ys = new int[4];
@@ -74,22 +74,23 @@ public class DitheringFilter extends ParameterizedTool {
         return ditheringImage;
     }
 
-    /*private void fillBorders(BufferedImage image, int width, int height, int[][] quantizedColors) {
+    private void fillBorders(BufferedImage image, int width, int height) {
         for (int x = 0; x < width; x++) {
-            setClosestColorAt(image, x, 0, quantizedColors);
-            setClosestColorAt(image, x, height - 1, quantizedColors);
+            setClosestColorAt(image, x, 0);
+            setClosestColorAt(image, x, height - 1);
         }
 
         for (int y = 0; y < height; y++) {
-            setClosestColorAt(image, 0, y, quantizedColors);
-            setClosestColorAt(image, width - 1, y, quantizedColors);
+            setClosestColorAt(image, 0, y);
+            setClosestColorAt(image, width - 1, y);
         }
     }
 
-    private void setClosestColorAt(BufferedImage image, int x, int y, int[][] quantizedColors) {
-        int closestRed = closest(ColorUtils.getRed(image.getRGB(x, y)), quantizedColors[0]);
-        int closestGreen = closest(ColorUtils.getGreen(image.getRGB(x, y)), quantizedColors[1]);
-        int closestBlue = closest(ColorUtils.getBlue(image.getRGB(x, y)), quantizedColors[2]);
+    private void setClosestColorAt(BufferedImage image, int x, int y) {
+        int rgb = image.getRGB(x, y);
+        int closestRed = ColorUtils.closestInPalette(ColorUtils.getRed(rgb), parameters.get(0).getValue().intValue());
+        int closestGreen = ColorUtils.closestInPalette(ColorUtils.getGreen(rgb), parameters.get(1).getValue().intValue());
+        int closestBlue = ColorUtils.closestInPalette(ColorUtils.getBlue(rgb), parameters.get(2).getValue().intValue());
         image.setRGB(x, y, ColorUtils.getRGB(closestRed, closestGreen, closestBlue));
-    }*/
+    }
 }

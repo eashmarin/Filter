@@ -25,7 +25,7 @@ public class ColorUtils {
         return Math.min(Math.max(value, 0), 255);
     }
 
-    public static int closestInPalette(int value, int paletteSize) {
-        return (int) (Math.round(paletteSize * value / 255.0) * (255.0 / paletteSize));
+    public static int closestInPalette(int color, int paletteSize) {
+        return (int) (Math.round((paletteSize - 1) * color / 255.0) * (255.0 / (paletteSize - 1)));
     }
 }

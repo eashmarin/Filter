@@ -28,9 +28,9 @@ public class OrderedDithering extends ParameterizedTool {
         double[][] greenMatrix = getNormalizedDitherMatrix(greenMatrixSize);
         double[][] blueMatrix = getNormalizedDitherMatrix(blueMatrixSize);
 
-        double kRed = (255.0 / redColors);
-        double kGreen = (255.0 / greenColors);
-        double kBlue = (255.0 / blueColors);
+        double kRed = (255.0 / (redColors - 1));
+        double kGreen = (255.0 / (greenColors - 1));
+        double kBlue = (255.0 / (blueColors - 1));
 
         BufferedImage ditheredImage = new BufferedImage(width, height, image.getType());
 
